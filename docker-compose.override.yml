@@ -1,1 +1,9 @@
 version: '3.4'
+
+services:
+  config.webmvc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "4000:80"
+

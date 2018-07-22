@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: Services/Config/ConfigHost/Dockerfile
+
+  config.webmvc:
+    image: ${DOCKER_REGISTRY}configwebmvc
+    build:
+      context: .
+      dockerfile: Web/Config/Config.WebMVC/Dockerfile
+
