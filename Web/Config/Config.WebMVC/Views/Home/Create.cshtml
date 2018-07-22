@@ -1,4 +1,4 @@
-﻿@model ConfigItem
+﻿@model Config.Infrastructure.Models.ConfigItem
 @inject IJsonHelper Json
 
 <div class="layout-content" data-scrollable>
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form asp-action="create" class="form-horizontal">
-                            
+
                             <div class="form-group row">
                                 <label class="col-sm-3 form-control-label">App Name</label>
                                 <div class="col-md-9">

@@ -1,4 +1,4 @@
-﻿@model List<ConfigItem>
+﻿@model List<Config.Infrastructure.Models.ConfigItem>
 
 <div class="layout-content" data-scrollable>
     <div class="container-fluid">
@@ -36,7 +36,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var item in Model){
+                    @foreach (var item in Model)
+                    {
                         <tr data-id="@item.Id">
                             <td>@item.AppName</td>
                             <td>@item.Name</td>

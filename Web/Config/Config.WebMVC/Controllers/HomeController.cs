@@ -4,9 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Config.WebMVC.Models;
-using Config.WebMVC.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Config.Infrastructure.Models;
+using Config.Infrastructure.Services;
+using Config.WebMVC.Models;
 
 namespace Config.WebMVC.Controllers
 {

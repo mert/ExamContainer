@@ -1,11 +1,10 @@
-﻿using Config.WebMVC.Infrastructure.Repositories;
-using Config.WebMVC.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Config.Infrastructure.Models;
+using Config.Infrastructure.Repositories;
 
-namespace Config.WebMVC.Infrastructure.Services
+namespace Config.Infrastructure.Services
 {
     public class ConfigService
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using ConfigLib;
 using Microsoft.AspNetCore.Mvc;
 using ServiceA.WebMVC.Models;
 
@@ -12,25 +13,13 @@ namespace ServiceA.WebMVC.Controllers
     {
         public IActionResult Index()
         {
-            return View();
-        }
+            using (var reader = new ConfigurationReader("ServiceA", "redis:6379", 99))
+            {
+                //var siteName = reader.GetValue<string>("siteName");
+                //var isBasketEnabled = reader.GetValue<bool>("isBasketEnabled");
+                //var maxItemCount = reader.GetValue<int>("maxItemCount");
+            }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
             return View();
         }
 

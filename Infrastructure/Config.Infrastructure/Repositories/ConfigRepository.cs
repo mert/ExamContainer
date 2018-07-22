@@ -1,12 +1,12 @@
-﻿using Config.WebMVC.Models;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Config.Infrastructure.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Config.WebMVC.Infrastructure.Repositories
+namespace Config.Infrastructure.Repositories
 {
     public class ConfigRepository
     {

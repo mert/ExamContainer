@@ -11,6 +11,7 @@ namespace ConfigLib
         readonly ConnectionMultiplexer _redis;
         readonly IDatabase _database;
         readonly BinaryFormatter _binaryFormatter;
+        readonly ISubscriber _bus;
 
         public ConfigurationReader(string applicationName, string connectionString, int refreshTimerIntervalInMs = 30_000)
         {
@@ -18,6 +19,11 @@ namespace ConfigLib
             _appName = applicationName;
             _redis = ConnectionMultiplexer.Connect(connectionString);
             _database = _redis.GetDatabase();
+
+            // appName -> reflesgTimerIntervalMs  send...
+            _bus = _redis.GetSubscriber();
+
+            _bus.Publish("refreshTimerIntervalInMs", refreshTimerIntervalInMs);
         }
 
         public T GetValue<T>(string key)

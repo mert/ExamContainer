@@ -20,5 +20,11 @@ services:
     ports:
       - "4000:80"
 
+  servicea.webmvc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8081:80"
+
 volumes:
   mongodata:

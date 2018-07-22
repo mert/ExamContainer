@@ -1,4 +1,5 @@
-﻿using Config.WebMVC.Models;
+﻿using Config.Infrastructure;
+using Config.Infrastructure.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
@@ -22,7 +23,7 @@ namespace Config.WebMVC.Infrastructure
         {
             if (!_ctx.ConfigItem.Find(l => true).Any())
             {
-                await _ctx.ConfigItem.InsertManyAsync(new List<ConfigItem>() {
+                await _ctx.ConfigItem.InsertManyAsync(new List<ConfigItem> {
                     new ConfigItem
                     {
                         AppName = "SERVICE-A",

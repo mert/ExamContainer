@@ -20,3 +20,10 @@ services:
       dockerfile: Web/Config/Config.WebMVC/Dockerfile
     depends_on:
       - mongodb
+
+  servicea.webmvc:
+    image: servicea
+    build:
+      context: .
+      dockerfile: Web/Demo/ServiceA.WebMVC/Dockerfile
+

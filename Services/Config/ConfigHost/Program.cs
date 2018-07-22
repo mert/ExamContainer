@@ -3,6 +3,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using StackExchange.Redis;
+using Config.Infrastructure.Services;
+using Config.Infrastructure;
+using Config.Infrastructure.Repositories;
 
 namespace ConfigHost
 {
@@ -19,6 +22,11 @@ namespace ConfigHost
                     {
                         return ConnectionMultiplexer.Connect("redis:6379");
                     });
+
+                    services.AddTransient<ConfigService>();
+                    services.AddTransient<ConfigRepository>();
+                    services.AddTransient<ConfigContext>();
+                    services.AddHostedService<HostedService>();
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {

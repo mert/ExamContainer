@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Config.Infrastructure;
+using Config.Infrastructure.Repositories;
+using Config.Infrastructure.Services;
 using Config.WebMVC.Infrastructure;
-using Config.WebMVC.Infrastructure.Repositories;
-using Config.WebMVC.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,13 +36,10 @@ namespace Config.WebMVC
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-
-            
             services.AddTransient<ConfigService>();
             services.AddTransient<ConfigRepository>();
             services.AddTransient<ConfigContextSeed>();
             services.AddTransient<ConfigContext>();
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
