@@ -20,5 +20,15 @@ namespace Config.WebMVC.Infrastructure.Services
         {
             return await _repository.GetItemsAsync();
         }
+
+        public async Task SaveConfig(ConfigItem item)
+        {
+            await _repository.SaveConfig(item);
+        }
+
+        public async Task<ConfigItem> GetItemAsync(string id)
+        {
+            return await _repository.GetItemAsync(id);
+        }
     }
 }

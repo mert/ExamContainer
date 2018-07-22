@@ -20,5 +20,15 @@ namespace Config.WebMVC.Infrastructure.Repositories
         {
             return await _context.ConfigItem.Find(new BsonDocument()).ToListAsync();
         }
+
+        public async Task SaveConfig(ConfigItem item)
+        {
+            await _context.ConfigItem.ReplaceOneAsync(doc => doc.Id == item.Id, item, new UpdateOptions { IsUpsert = true });
+        }
+
+        public async Task<ConfigItem> GetItemAsync(string id)
+        {
+            return await _context.ConfigItem.Find(l => l.Id == id).FirstOrDefaultAsync();
+        }
     }
 }

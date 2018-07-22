@@ -5,39 +5,144 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Config.WebMVC.Models;
+using Config.WebMVC.Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Config.WebMVC.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        readonly ConfigService _service;
+
+        public HomeController(ConfigService configService)
         {
+            _service = configService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var items = await _service.GetAll();
+            return View(items);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Types = GetTypes();
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public async Task<IActionResult> Create(ConfigItem model, string value)
         {
-            ViewData["Message"] = "Your application description page.";
+            switch (model.Type)
+            {
+                case "Int":
+                    if (!int.TryParse(value, out var intValue))
+                        ModelState.AddModelError("Type", "type error");
+                    model.Value = intValue;
+                    break;
+                case "Bool":
+                    if (!bool.TryParse(value, out var boolValue))
+                        ModelState.AddModelError("Type", "type error");
+                    model.Value = boolValue;
+                    break;
+                case "Decimal":
+                    if (!decimal.TryParse(value, out var decimalValue))
+                        ModelState.AddModelError("Type", "type error");
+                    model.Value = decimalValue;
+                    break;
+                default:
+                    model.Value = value;
+                    break;
+            }
 
-            return View();
+            if (ModelState.IsValid)
+            {
+                await _service.SaveConfig(model);
+                return RedirectToAction("index");
+            }
+
+            ViewBag.Types = GetTypes();
+            return View(model);
         }
 
-        public IActionResult Contact()
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
         {
-            ViewData["Message"] = "Your contact page.";
+            var item = await _service.GetItemAsync(id);
+            if (item == null)
+                return Redirect(Request.Headers["Referer"]);
 
-            return View();
+            ViewBag.Types = GetTypes();
+            return View(item);
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public async Task<IActionResult> Edit(ConfigItem model, string value)
         {
-            return View();
+            switch (model.Type)
+            {
+                case "Int":
+                    if (!int.TryParse(value, out var intValue))
+                        ModelState.AddModelError("Type", "type error");
+                    model.Value = intValue;
+                    break;
+                case "Bool":
+                    if (!bool.TryParse(value, out var boolValue))
+                        ModelState.AddModelError("Type", "type error");
+                    model.Value = boolValue;
+                    break;
+                case "Decimal":
+                    if (!decimal.TryParse(value, out var decimalValue))
+                        ModelState.AddModelError("Type", "type error");
+                    model.Value = decimalValue;
+                    break;
+                default:
+                    model.Value = value;
+                    break;
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _service.SaveConfig(model);
+                return RedirectToAction("index");
+            }
+
+            ViewBag.Types = GetTypes();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private List<SelectListItem> GetTypes() {
+            return new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "String",
+                    Value = "String"
+                },
+                new SelectListItem
+                {
+                    Text = "Int",
+                    Value = "Int"
+                },
+                new SelectListItem
+                {
+                    Text = "Bool",
+                    Value = "Bool"
+                },
+                new SelectListItem
+                {
+                    Text = "Decimal",
+                    Value = "Decimal"
+                }
+            };
         }
     }
 }
