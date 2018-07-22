@@ -18,4 +18,5 @@ services:
     build:
       context: .
       dockerfile: Web/Config/Config.WebMVC/Dockerfile
-
+    depends_on:
+      - mongodb

@@ -12,7 +12,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-    - ./data/db:/data/db
+    - mongodata:/data/db
 
   config.webmvc:
     environment:
@@ -20,3 +20,5 @@ services:
     ports:
       - "4000:80"
 
+volumes:
+  mongodata:
