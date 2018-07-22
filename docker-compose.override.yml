@@ -1,6 +1,19 @@
 version: '3.4'
 
 services:
+  redis:
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+
+  mongodb:
+    ports:
+      - "27017:27017"
+    volumes:
+    - ./data/db:/data/db
+
   config.webmvc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
