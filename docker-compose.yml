@@ -12,6 +12,9 @@ services:
     build:
       context: .
       dockerfile: Services/Config/ConfigHost/Dockerfile
+    depends_on:
+      - mongodb
+      - redis
 
   config.webmvc:
     image: ${DOCKER_REGISTRY}configwebmvc
@@ -26,4 +29,6 @@ services:
     build:
       context: .
       dockerfile: Web/Demo/ServiceA.WebMVC/Dockerfile
+    depends_on:
+      - redis
 
