@@ -15,7 +15,7 @@ namespace ConfigHost
         public void Increment()
         {
             LastRunTime = NextRunTime;
-            NextRunTime = LastRunTime.AddSeconds(10);
+            NextRunTime = LastRunTime.AddMilliseconds(Interval);
         }
 
         public bool ShouldRun(DateTime currentTime)
