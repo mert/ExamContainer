@@ -8,4 +8,7 @@
     <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Config.Infrastructure\Config.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>
